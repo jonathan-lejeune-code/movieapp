@@ -3,9 +3,8 @@
     <img src="@/assets/movieHero.jpg" alt="image pop corn" />
     <div class="text-container">
       <div class="text">
-        <span class="mini-heading">Movie</span>
-        <h1><span>Now</span> Streaming</h1>
-        <a href="" class="button">View Movies</a>
+        <span class="mini-heading">Choisie ton film</span>
+        <h1><span>Movie</span> App</h1>
       </div>
     </div>
   </div>
@@ -58,7 +57,7 @@ export default {
       font-weight: 600;
       font-size: 18px;
       text-transform: uppercase;
-      color: #c92502;
+      color: #d50000;
       margin-bottom: 8px;
       @media (min-width: 750px) {
         font-size: 22px;
@@ -68,6 +67,8 @@ export default {
       color: #fff;
       font-size: 64px;
       font-weight: 200;
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px red,
+        0 0 30px red, 2px 2px 2px rgba(238, 0, 0, 0);
       margin-bottom: 8px;
       @media (min-width: 750px) {
         font-size: 84px;
