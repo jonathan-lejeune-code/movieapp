@@ -12,7 +12,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'MoviePage',
+  name: 'SearchPage',
   data() {
     return {
       showDetails: false,

@@ -84,7 +84,7 @@ export default {
         {
           icon: 'mdi-movie-search',
           title: 'Recherche-Film',
-          to: '/movies',
+          to: '/Search',
         },
       ],
       miniVariant: false,
