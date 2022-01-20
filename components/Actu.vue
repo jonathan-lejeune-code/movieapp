@@ -30,7 +30,7 @@
             <p class="release">
               Released:
               {{
-                new Date(movie.release_date).toLocaleString('en-us', {
+                new Date(movie.release_date).toLocaleString('fr-FR', {
                   month: 'long',
                   day: 'numeric',
                   year: 'numeric',
@@ -39,7 +39,7 @@
             </p>
             <NuxtLink
               class="button button-light"
-              :to="{ name: 'movie', params: { id: movie.id } }"
+              :to="{ name: 'movies-id', params: { id: movie.id } }"
             >
               obtenir plus d'informations
             </NuxtLink>
@@ -75,7 +75,7 @@
             </p>
             <NuxtLink
               class="button button-light"
-              :to="{ name: 'movies-id', params: { id: movie.id } }"
+              :to="{ name: 'movies-movieid', params: { id: movie.id } }"
             >
               Obtenir plus d'informations
             </NuxtLink>

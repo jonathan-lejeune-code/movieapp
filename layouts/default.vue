@@ -32,7 +32,7 @@
       <v-spacer />
     </v-app-bar>
     <v-content>
-      <nuxt />
+      <nuxt keep-alive />
     </v-content>
     <v-footer :fixed="fixed" app color="red accent-4">
       <span>Film-App &copy; {{ new Date().getFullYear() }}</span>
