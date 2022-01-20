@@ -1,4 +1,4 @@
-<template>
+template>
   <!-- Loading -->
   <Loading v-if="$fetchState.pending" />
 
@@ -33,9 +33,9 @@
         <p class="movie-fact">
           <span>Revenue:</span>
           {{
-            movie.revenue.toLocaleString('fr-FR', {
+            movie.revenue.toLocaleString('en-us', {
               style: 'currency',
-              currency: 'Euro',
+              currency: 'USD',
             })
           }}
         </p>
@@ -47,23 +47,18 @@
 
 <script>
 import axios from 'axios'
-
 export default {
-  name: 'MoviePage',
-
+  name: 'singleMovie',
   async fetch() {
     await this.getSingleMovie()
   },
-
   // delay for fetching
   fetchDelay: 1000,
-
   head() {
     return {
       title: this.movie.title,
     }
   },
-
   data() {
     return {
       movie: '',
@@ -72,7 +67,7 @@ export default {
   methods: {
     async getSingleMovie() {
       const data = axios.get(
-        `https://api.themoviedb.org/3/movie/${this.$route.params.id}?api_key=7b88edb80dadf740ad49dc51bc2b8c24&language=fr-FR`
+        `https://api.themoviedb.org/3/movie/${this.$route.params.movieid}?api_key=7b88edb80dadf740ad49dc51bc2b8c24&language=fr-FR`
       )
       const result = await data
       this.movie = result.data
@@ -89,12 +84,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   padding: 32px 16px;
-
   .button {
     align-self: flex-start;
     margin-bottom: 32px;
   }
-
   .movie-info {
     display: flex;
     flex-direction: column;
@@ -109,31 +102,26 @@ export default {
       img {
         max-height: 500px;
         width: 100%;
-
         @media (min-width: 800px) {
           max-height: 700px;
           width: initial;
         }
       }
     }
-
     .movie-content {
       h1 {
         font-size: 56px;
         font-weight: 400;
       }
-
       .movie-fact {
         margin-top: 12px;
         font-size: 20px;
         line-height: 1.5;
-
         span {
           font-weight: 600;
           text-decoration: underline;
         }
       }
-
       .tagline {
         font-style: italic;
         span {
