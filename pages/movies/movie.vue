@@ -49,7 +49,7 @@
 import axios from 'axios'
 
 export default {
-  name: 'singleMovie',
+  name: 'MoviePage',
 
   async fetch() {
     await this.getSingleMovie()
@@ -72,7 +72,7 @@ export default {
   methods: {
     async getSingleMovie() {
       const data = axios.get(
-        `https://api.themoviedb.org/3/movie/${this.$route.params.id}?api_key=7b88edb80dadf740ad49dc51bc2b8c24&language=en-US`
+        `https://api.themoviedb.org/3/movie/${this.$route.params.id}?api_key=7b88edb80dadf740ad49dc51bc2b8c24&language=fr-FR`
       )
       const result = await data
       this.movie = result.data

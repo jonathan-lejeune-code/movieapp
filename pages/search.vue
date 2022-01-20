@@ -1,6 +1,18 @@
 <template>
   <div class="home">
-    <h2>Actualités</h2>
+    <!-- Search -->
+    <div class="container search">
+      <input
+        type="text"
+        placeholder="Recherche"
+        class="white--text"
+        @keyup.enter="$fetch"
+        v-model.lazy="searchInput"
+      />
+      <button v-show="searchInput !== ''" @click="clearSearch" class="button">
+        Clear Search
+      </button>
+    </div>
 
     <!-- Loading Animation -->
     <Loading v-if="$fetchState.pending" />
@@ -17,20 +29,20 @@
           <div class="movie-img">
             <img
               :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
-              alt="Affiche du film"
+              alt=""
             />
             <p class="review">{{ movie.vote_average }}</p>
             <p class="overview">{{ movie.overview }}</p>
           </div>
-          <div class="info">
+          <div class="news">
             <p class="title">
               {{ movie.title.slice(0, 25)
               }}<span v-if="movie.title.length > 25">...</span>
             </p>
             <p class="release">
-              Released:
+              Date de Sortie:
               {{
-                new Date(movie.release_date).toLocaleString('en-us', {
+                new Date(movie.release_date).toLocaleString('fr-FR', {
                   month: 'long',
                   day: 'numeric',
                   year: 'numeric',
@@ -39,9 +51,9 @@
             </p>
             <NuxtLink
               class="button button-light"
-              :to="{ name: 'movie', params: { id: movie.id } }"
+              :to="{ name: 'movies-id', params: { id: movie.id } }"
             >
-              obtenir plus d'informations
+              Obtenir plus d'informations
             </NuxtLink>
           </div>
         </div>
@@ -89,7 +101,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'ActuIndex',
+  name: 'SearchPage',
   head() {
     return {
       title: 'Movie App - Latest Streaming Movie Info',
@@ -134,6 +146,19 @@ export default {
         this.movies.push(movie)
       })
     },
+    async searchMovies() {
+      const data = axios.get(
+        `https://api.themoviedb.org/3/search/movie?api_key=7b88edb80dadf740ad49dc51bc2b8c24&language=fr-FR&page=1&query=${this.searchInput}`
+      )
+      const result = await data
+      result.data.results.forEach((movie) => {
+        this.searchedMovies.push(movie)
+      })
+    },
+    clearSearch() {
+      this.searchInput = ''
+      this.searchedMovies = []
+    },
   },
   watch: {
     searchInput() {
@@ -144,14 +169,6 @@ export default {
 </script>
 
 <style lang="scss">
-h2 {
-  text-align: center;
-  margin: 10px;
-  font-size: 60px;
-  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px red,
-    0 0 30px red, 2px 2px 2px rgba(238, 0, 0, 0);
-}
-
 .home {
   .loading {
     padding-top: 120px;
@@ -195,13 +212,9 @@ h2 {
         position: relative;
         display: flex;
         flex-direction: column;
-        box-shadow: -12px -10px 13px -1px red, 12px -10px 13px -7px red;
-
         .movie-img {
           position: relative;
           overflow: hidden;
-          height: 600px;
-
           &:hover {
             .overview {
               transform: translateY(0);
@@ -228,20 +241,18 @@ h2 {
               0 2px 4px -1px rgba(0, 0, 0, 0.06);
           }
           .overview {
-            line-height: 2;
+            line-height: 1.5;
             position: absolute;
             bottom: 0;
-            background-color: rgba(201, 2, 2, 0.9);
+            background-color: rgba(201, 38, 2, 0.9);
             padding: 12px;
             color: #fff;
             transform: translateY(100%);
             transition: 0.3s ease-in-out all;
           }
         }
-        .news {
+        .info {
           margin-top: auto;
-          box-shadow: -10px 10px 13px -7px red, 10px 10px 13px -7px red;
-          background-color: rgba(0, 0, 0, 0.06);
           .title {
             margin-top: 8px;
             color: #fff;
@@ -249,13 +260,10 @@ h2 {
           }
           .release {
             margin-top: 8px;
-            color: #fff;
+            color: #c9c9c9;
           }
           .button {
             margin-top: 8px;
-            text-decoration: none;
-            color: red;
-            font-size: 18px;
           }
         }
       }
