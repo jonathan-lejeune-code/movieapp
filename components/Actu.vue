@@ -75,7 +75,7 @@
             </p>
             <NuxtLink
               class="button button-light"
-              :to="{ name: 'movies-movie', params: { id: movie.id } }"
+              :to="{ name: 'movie', params: { id: movie.id } }"
             >
               Obtenir plus d'informations
             </NuxtLink>
@@ -90,6 +90,7 @@
 import axios from 'axios'
 export default {
   name: 'ActuIndex',
+
   head() {
     return {
       title: 'Movie App - Latest Streaming Movie Info',
@@ -127,7 +128,7 @@ export default {
   methods: {
     async getMovies() {
       const data = axios.get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=7b88edb80dadf740ad49dc51bc2b8c24&language=fr-FR&page=1`
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=7b88edb80dadf740ad49dc51bc2b8c24&language=fr-FR`
       )
       const result = await data
       result.data.results.forEach((movie) => {
@@ -240,6 +241,8 @@ h2 {
         }
         .news {
           margin-top: auto;
+          padding-left: 10px;
+          border-radius: 10px;
           box-shadow: -10px 10px 13px -7px red, 10px 10px 13px -7px red;
           background-color: rgba(0, 0, 0, 0.06);
           .title {
