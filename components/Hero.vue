@@ -1,6 +1,6 @@
 <template>
   <div class="hero">
-    <img src="@/assets/movieHero.jpg" alt="image pop corn" />
+    <img src="@/assets/movieHero1.jpeg" alt="image pop corn" />
     <div class="text-container">
       <div class="text">
         <span class="mini-heading">Choisie ton film</span>
